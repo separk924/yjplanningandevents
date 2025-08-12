@@ -41,7 +41,7 @@ export default function Home() {
               )}
             </div>
             <div className="absolute bottom-[50px] text-orange-50 overflow-hidden">
-              <h1 className="text-4xl font-bold ml-10">Let's make your dream wedding come true</h1>
+              <h1 className="text-4xl font-bold ml-10">Let&apos;s make your dream wedding come true</h1>
             </div>
           </main>
         </div>
