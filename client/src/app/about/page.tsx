@@ -27,7 +27,7 @@ export default function Home() {
           <main className={`transition-opacity duration-500 `}>
             <div className="flex items-center justify-between w-full px-8">
               <div className="flex items-center">
-                <img alt="logo" src="../../../public/YJ_Planning&Events_Logo.png" className="w-15 h-25 mt-2"/>
+                <img alt="logo" src="/YJ_Planning&Events_Logo.png" className="w-15 h-25 mt-2"/>
               </div>
               <div className="text-5xl text-center">
                 About
