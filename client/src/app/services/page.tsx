@@ -1,11 +1,9 @@
 "use client";
 import { useState } from "react";
-import LogoLoader from "@/components/LogoLoader";
 import Navbar from "@/components/Navbar";
 import { SharpMenu } from "@/assets/Menu";
 
 export default function Home() {
-    const [isLogoDone, setIsLogoDone] = useState(false);
     const [openNavbar, setOpenNavbar] = useState(false);
     const [animationClass, setAnimationClass] = useState('animate-slide-in-from-left');
 
