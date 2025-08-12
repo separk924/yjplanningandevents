@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import { SharpMenu } from "@/assets/Menu";
-import Image from 'next/image';
+// import Image from 'next/image';
 
 export default function Home() {
     const [openNavbar, setOpenNavbar] = useState(false);
@@ -27,7 +27,7 @@ export default function Home() {
           <main className={`transition-opacity duration-500 `}>
             <div className="flex items-center justify-between w-full px-8">
               <div className="flex items-center">
-                <Image alt="logo" src="/YJ_Planning&Events_Logo.png" className="w-15 h-25 mt-2"/>
+                <img alt="logo" src="/YJ_Planning&Events_Logo.png" className="w-15 h-25 mt-2"/>
               </div>
               <div className="text-5xl text-center">
                 FAQ
@@ -42,7 +42,7 @@ export default function Home() {
             </div>
             <div className="mt-10 text-slate-500 overflow-hidden">
               <div className="flex justify-center">
-                <Image alt="profile" src="/profile.png" className="w-80 h-100"/>
+                <img alt="profile" src="/profile.png" className="w-80 h-100"/>
               </div>
               <p className="text-xl font-bold m-10 ml-80 mr-80">
                 I am happy to take your donation; any amount will be greatly appreciated. 

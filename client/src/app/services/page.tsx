@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import { SharpMenu } from "@/assets/Menu";
-import Image from 'next/image';
+// import Image from 'next/image';
 
 export default function Home() {
     const [openNavbar, setOpenNavbar] = useState(false);
@@ -27,7 +27,7 @@ export default function Home() {
           <main className={`transition-opacity duration-500 `}>
             <div className="flex items-center justify-between w-full px-8">
               <div className="flex items-center">
-                <Image alt="logo" src="/YJ_Planning&Events_Logo.png" className="w-15 h-25 mt-2"/>
+                <img alt="logo" src="/YJ_Planning&Events_Logo.png" className="w-15 h-25 mt-2"/>
               </div>
               <div className="text-5xl text-center">
                 About

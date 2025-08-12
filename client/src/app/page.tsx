@@ -3,7 +3,7 @@ import { useState } from "react";
 import LogoLoader from "@/components/LogoLoader";
 import Navbar from "@/components/Navbar";
 import { SharpMenu } from "../assets/Menu"
-import Image from 'next/image';
+// import Image from 'next/image';
 
 export default function Home() {
     const [isLogoDone, setIsLogoDone] = useState(false);
@@ -30,7 +30,7 @@ export default function Home() {
           <main className={`transition-opacity duration-500 ${isLogoDone ? 'opacity-100' : 'opacity-0'}`}>
             <div className="flex items-center">
               <div className="w-full flex justify-center">
-                <Image alt="logo" src="/YJ_Planning&Events_Logo.png" className="w-30 h-50 mt-2"/>
+                <img alt="logo" src="/YJ_Planning&Events_Logo.png" className="w-30 h-50 mt-2"/>
               </div>
               {!openNavbar ? (
                 <div className="width-auto mr-3 -mt-30" onClick={handleOpen}>
