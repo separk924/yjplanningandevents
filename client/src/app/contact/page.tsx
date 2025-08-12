@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import { SharpMenu } from "@/assets/Menu";
+import Image from 'next/image';
 
 export default function Home() {
     const [openNavbar, setOpenNavbar] = useState(false);
@@ -26,7 +27,7 @@ export default function Home() {
           <main className={`transition-opacity duration-500 `}>
             <div className="flex items-center justify-between w-full px-8">
               <div className="flex items-center">
-                <img src="/YJ_Planning&Events_Logo.png" className="w-15 h-25 mt-2"/>
+                <Image alt="logo" src="/YJ_Planning&Events_Logo.png" className="w-15 h-25 mt-2"/>
               </div>
               <div className="text-5xl text-center">
                 Services
@@ -43,7 +44,7 @@ export default function Home() {
                 <div className="flex justify-center items-start gap-10 px-10 py-10 flex-wrap">
                     {/* IMAGE */}
                     <div className="flex-shrink-0">
-                        <img src="/profile.png" className="w-80 h-100" alt="Profile" />
+                        <Image src="/profile.png" className="w-80 h-100" alt="Profile" />
                     </div>
 
                     {/* FORM */}
