@@ -21,7 +21,7 @@ const Navbar: React.FC<NavBarProps> = ({ setOpenNavbar, animationClass, setAnima
         { name: "About", href: "/about" },
         { name: "Services", href: "/services"},
         { name: "Contact", href: "/contact"},
-        { name: "FAQ", href: "/faq"},
+        // { name: "FAQ", href: "/faq"},
         // { name: "Reviews", href: "/reviews"}
     ]
 

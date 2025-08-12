@@ -41,27 +41,30 @@ export default function Home() {
                 <Navbar {...navBarProps}/>
               )}
             </div>
-            <div className="mt-10 text-slate-500 overflow-hidden">
+            <div className="mt-10 text-slate-500 overflow-hidden flex flex-col items-center">
               <div className="flex justify-center">
                 <img src="/profile.png" className="w-80 h-100"/>
               </div>
-              <p className="text-xl font-bold m-10 ml-80 mr-80">
-                I am happy to take your donation; any amount will be greatly appreciated. 
-                The Japanese yen for commerce is still well-known. Happiness can be found in the depths of chocolate pudding. 
-                The reservoir water level continued to lower while we enjoyed our long shower.</p>
-              <p className="text-xl font-bold m-10 ml-80 mr-80">
-                The bread dough reminded her of Santa Clause’s belly.
-                The pigs were insulted that they were named hamburgers.
-                She felt that chill that makes the hairs on the back of your neck when he walked into the room.
-                You have every right to be angry, but that doesn't give you the right to be mean.
-                Two more days and all his problems would be solved.</p>
-              <p className="text-xl font-bold m-10 ml-80 mr-80">
-                They called out her name time and again, but were met with nothing but silence.
-                I was very proud of my nickname throughout high school but today- I couldn’t be any different to what my nickname was.
-                I come from a tribe of head-hunters, so I will never need a shrink.
-                Before he moved to the inner city, he had always believed that security complexes were psychological.
-                The small white buoys marked the location of hundreds of crab pots.</p>
+              <div className="max-w-4xl w-full px-4">
+                <p className="text-xl font-bold m-10">
+                  Hello, and welcome! My name is Allison, and I’m the founder, hands, and heart behind YJ Planning & Events — 
+                  a boutique event planning service dedicated to creating timeless, romantic, and thoughtfully curated celebrations.</p>
+                <p className="text-xl font-bold m-10">
+                  My journey into event planning began in the most personal way: helping close friends plan their weddings and special 
+                  occasions. I quickly became the “go-to” person for timelines, floral ideas, and design inspiration — not because it was 
+                  my job at the time, but because I genuinely loved crafting moments that felt intentional and beautiful. Word of mouth 
+                  began to spread, and one event led to another, until I realized just how much joy and fulfillment this work brought me.</p>
+                <p className="text-xl font-bold m-10">
+                  Over the years, I’ve learned that planning an event isn’t just about logistics and décor; it’s about telling a story. Each 
+                  celebration I design reflects the personalities, values, and dreams of the people at its heart. I consider it an incredible 
+                  honor to be entrusted with such meaningful milestones, and I approach every project with care, creativity, and a commitment 
+                  to making the process as seamless and enjoyable as possible.</p>
+                <p className="text-xl font-bold m-10">
+                  Whether it’s an intimate gathering, a once-in-a-lifetime wedding, or a milestone celebration, my goal is to create moments 
+                  that you’ll remember — not just for how beautiful they looked, but for how they made you feel.</p>
+              </div>
             </div>
+              
           </main>
         </div>
       </>

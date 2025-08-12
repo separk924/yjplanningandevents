@@ -31,7 +31,7 @@ export default function Home() {
                 <img src="/YJ_Planning&Events_Logo.png" className="w-15 h-25 mt-2"/>
               </div>
               <div className="text-5xl text-center">
-                Services
+                About
               </div>
               {!openNavbar ? (
                 <div className="flex items-center cursor-pointer mr-10" onClick={handleOpen}>
@@ -41,27 +41,67 @@ export default function Home() {
                 <Navbar {...navBarProps}/>
               )}
             </div>
-            <div className="mt-10 text-slate-500 overflow-hidden">
-              <div className="flex justify-center">
-                <img src="/profile.png" className="w-80 h-100"/>
+            <div className="mt-10 text-slate-500 overflow-hidden flex flex-col items-center">
+              <div className="max-w-4xl w-full px-6">
+                <h1 className="text-2xl font-bold mt-10 -mb-6">Full Planning</h1>
+                <p className="text-xl font-bold m-10">
+                  Perfect for couples who want a seamless, guided experience from “Yes” to “I Do.”<br/>
+                  From the very first consultation to the last dance, I’ll manage every detail — designing your event’s look and feel, sourcing and managing 
+                  vendors, creating and tracking budgets, building timelines, and ensuring everything comes together flawlessly. This package gives you the 
+                  freedom to truly enjoy the planning process without the overwhelm.<br/><br/>
+                  Includes:</p>
+                <ul className="list-disc list-outside text-xl font-bold m-10 pl-8 -mt-10">
+                  <li>Initial vision and style consultation</li>
+                  <li>Venue and vendor research, recommendations, and bookings</li>
+                  <li>Budget creation and tracking</li>
+                  <li>Monthly planning meetings and updates</li>
+                  <li>Timeline creation and management</li>
+                  <li>Vendor communication and contract management</li>
+                  <li>On-site coordination and management on the day of the event</li>
+                  <li>Unlimited email support throughout planning</li>
+                </ul>
+                <p className="text-xl font-bold m-10">Full planning starts at $4550</p>
+
+                <h1 className="text-2xl font-bold mt-10 -mb-6">Partial Planning</h1>
+                <p className="text-xl font-bold m-10">
+                  Ideal for couples who have started planning but want professional guidance to bring all the pieces together.<br/>
+                  You may already have your venue and some vendors booked, but need help refining the design, finalizing details, 
+                  and keeping everything on track. I’ll step in partway to make sure your vision is cohesive, your plans are solid, 
+                  and nothing is overlooked.<br/><br/>
+                  Includes:</p>
+                <ul className="list-disc list-outside text-xl font-bold m-10 pl-8 -mt-10">
+                  <li>Review of plans, contracts, and vendors booked so far</li>
+                  <li>Supplemental vendor recommendations</li>
+                  <li>Design refinement and style direction</li>
+                  <li>Budget review and adjustments</li>
+                  <li>6 month, 3 month, 1 month, 2 week before planning meetings</li>
+                  <li>Timeline creation and vendor confirmation</li>
+                  <li>On-site coordination and management on the day of the event</li>
+                </ul>
+                <p className="text-xl font-bold m-10">Partial planning starts at $3250</p>
+
+                <h1 className="text-2xl font-bold mt-10 -mb-6">Day-Of Coordination</h1>
+                <p className="text-xl font-bold m-10">
+                  For couples who have done all the planning but want to relax and fully enjoy the day without worrying about logistics.<br/>
+                  I’ll step in a few weeks before your event to learn all the details, confirm vendor arrangements, create a detailed 
+                  timeline, and handle every moving part on the wedding day so you can simply be present and soak in the moments.<br/><br/>
+                  Includes:</p>
+                <ul className="list-disc list-outside text-xl font-bold m-10 pl-8 -mt-10">
+                  <li>Consultation 4–6 weeks before the event</li>
+                  <li>Review of contracts, vendor lists, and final details</li>
+                  <li>Creation of a detailed day-of timeline</li>
+                  <li>Vendor confirmations and point of contact</li>
+                  <li>On-site management of the ceremony, reception, and transitions</li>
+                  <li>Coordination of setup, décor placement, and breakdown</li>
+                  <li>Discreet troubleshooting for any unexpected issues</li>
+                </ul>
+                <p className="text-xl font-bold m-10">Day of Coordinator starts at $1250</p>
+
+                <p className="text-xl font-bold mt-10 mb-30">No matter which package you choose, my goal is the same: to bring your vision to life while keeping the process calm, 
+                  organized, and beautifully executed.</p>
               </div>
-              <p className="text-xl font-bold m-10 ml-80 mr-80">
-                I am happy to take your donation; any amount will be greatly appreciated. 
-                The Japanese yen for commerce is still well-known. Happiness can be found in the depths of chocolate pudding. 
-                The reservoir water level continued to lower while we enjoyed our long shower.</p>
-              <p className="text-xl font-bold m-10 ml-80 mr-80">
-                The bread dough reminded her of Santa Clause’s belly.
-                The pigs were insulted that they were named hamburgers.
-                She felt that chill that makes the hairs on the back of your neck when he walked into the room.
-                You have every right to be angry, but that doesn't give you the right to be mean.
-                Two more days and all his problems would be solved.</p>
-              <p className="text-xl font-bold m-10 ml-80 mr-80">
-                They called out her name time and again, but were met with nothing but silence.
-                I was very proud of my nickname throughout high school but today- I couldn’t be any different to what my nickname was.
-                I come from a tribe of head-hunters, so I will never need a shrink.
-                Before he moved to the inner city, he had always believed that security complexes were psychological.
-                The small white buoys marked the location of hundreds of crab pots.</p>
             </div>
+              
           </main>
         </div>
       </>
