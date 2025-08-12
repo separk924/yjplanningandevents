@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from 'next/image';
 
 interface LogoLoaderProps {
     onFinish: () => void;
@@ -32,7 +33,7 @@ const LogoLoader = ({ onFinish }: LogoLoaderProps ) => {
             ${animateOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
             <div className={`transform transition-all duration-2000
                 ${animateIn ? 'translate-y-0 opacity-100' : 'translate-y-[-200px] opacity-0'}`}>
-                <img src="/YJ_Planning&Events_Logo.png" alt="Logo" className="w-32 h-[220px]"/>
+                <Image src="/YJ_Planning&Events_Logo.png" alt="Logo" className="w-32 h-[220px]"/>
             </div>
         </div>
     )
