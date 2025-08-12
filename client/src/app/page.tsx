@@ -29,7 +29,7 @@ export default function Home() {
         <div className="relative min-h-screen bg-cover bg-left bg-no-repeat" style={{ backgroundImage: "url('/main.png')" }}>
           <main className={`transition-opacity duration-500 ${isLogoDone ? 'opacity-100' : 'opacity-0'}`}>
             <div className="flex items-center">
-              <div className="w-full flex justify-center">
+              <div className="w-screen flex justify-center">
                 <img alt="logo" src="/YJ_Planning&Events_Logo.png" className="w-30 h-50 mt-2"/>
               </div>
               {!openNavbar ? (
@@ -40,7 +40,7 @@ export default function Home() {
                 <Navbar {...navBarProps}/>
               )}
             </div>
-            <div className="absolute bottom-[50px] text-orange-50 overflow-hidden">
+            <div className="absolute bottom-[50px] overflow-hidden flex justify-center items-center w-full">
               <h1 className="text-4xl font-bold ml-10">Let&apos;s make your dream wedding come true</h1>
             </div>
           </main>
