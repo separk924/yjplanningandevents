@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node --loader ts-node/esm node_modules/next/dist/bin/next dev",
-    "start": "node --loader ./instrumentation.mjs node_modules/next/dist/bin/next start",
+    "start": "node --loader ./instrumentation.js node_modules/next/dist/bin/next start",
     "build": "prisma generate && next build",
     "lint": "next lint"
   },
