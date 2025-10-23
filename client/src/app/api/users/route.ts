@@ -10,7 +10,7 @@ export async function GET(req: Request) {
 
   if (id) return getUserById(id)
   if (email) return getUserByEmail(email)
-  if (firstName) return searchUsersByName(firstName)
+  // if (firstName) return searchUsersByName(firstName)
 
   const users = await prisma.user.findMany()
   return NextResponse.json(users)
@@ -59,37 +59,37 @@ export async function POST(req: Request) {
 }
 
 // ----------------- UPDATE a user -----------------
-export async function PUT(req: Request) {
-  try {
-    const body = await req.json();
+// export async function PUT(req: Request) {
+//   try {
+//     const body = await req.json();
 
-    // Expecting the body to include the user's ID and fields to update
-    const { id, firstName, lastName, email, phoneNumber, eventLocation, eventDate, guestCount, additionalDetails } = body;
+//     // Expecting the body to include the user's ID and fields to update
+//     const { id, firstName, lastName, email, phoneNumber, eventLocation, eventDate, guestCount, additionalDetails } = body;
 
-    if (!id) {
-      return NextResponse.json({ error: "User ID is required" }, { status: 400 });
-    }
+//     if (!id) {
+//       return NextResponse.json({ error: "User ID is required" }, { status: 400 });
+//     }
 
-    const updatedUser = await prisma.user.update({
-      where: { id },
-      data: {
-        firstName,
-        lastName,
-        email,
-        phoneNumber,
-        eventLocation,
-        eventDate: eventDate ? new Date(eventDate) : undefined,
-        guestCount: guestCount ? Number(guestCount) : undefined,
-        additionalDetails,
-      },
-    });
+//     const updatedUser = await prisma.user.update({
+//       where: { id },
+//       data: {
+//         firstName,
+//         lastName,
+//         email,
+//         phoneNumber,
+//         eventLocation,
+//         eventDate: eventDate ? new Date(eventDate) : undefined,
+//         guestCount: guestCount ? Number(guestCount) : undefined,
+//         additionalDetails,
+//       },
+//     });
 
-    return NextResponse.json(updatedUser, { status: 200 });
-  } catch (err) {
-    console.error("PUT /api/users error:", err);
-    return NextResponse.json({ error: "Failed to update user" }, { status: 500 });
-  }
-}
+//     return NextResponse.json(updatedUser, { status: 200 });
+//   } catch (err) {
+//     console.error("PUT /api/users error:", err);
+//     return NextResponse.json({ error: "Failed to update user" }, { status: 500 });
+//   }
+// }
 
 // ----------------- DELETE a user -----------------
 export async function DELETE(req: Request) {
@@ -113,14 +113,14 @@ export async function DELETE(req: Request) {
 }
 
 // ----------------- Example: Search users by name -----------------
-async function searchUsersByName(firstName: string) {
-  const users = await prisma.user.findMany({
-    where: {
-      firstName: {
-        contains: firstName,
-        mode: 'insensitive',
-      },
-    },
-  })
-  return NextResponse.json(users)
-}
+// async function searchUsersByName(firstName: string) {
+//   const users = await prisma.user.findMany({
+//     where: {
+//       firstName: {
+//         contains: firstName,
+//         mode: 'insensitive',
+//       },
+//     },
+//   })
+//   return NextResponse.json(users)
+// }
