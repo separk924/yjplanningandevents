@@ -6,11 +6,11 @@ export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)
   const id = searchParams.get('id')
   const email = searchParams.get('email')
-  const name = searchParams.get('name')
+  const firstName = searchParams.get('firstName')
 
   if (id) return getUserById(id)
   if (email) return getUserByEmail(email)
-  if (name) return searchUsersByName(name)
+  if (firstName) return searchUsersByName(firstName)
 
   const users = await prisma.user.findMany()
   return NextResponse.json(users)
@@ -113,11 +113,11 @@ export async function DELETE(req: Request) {
 }
 
 // ----------------- Example: Search users by name -----------------
-async function searchUsersByName(name: string) {
+async function searchUsersByName(firstName: string) {
   const users = await prisma.user.findMany({
     where: {
       name: {
-        contains: name,
+        contains: firstName,
         mode: 'insensitive',
       },
     },
