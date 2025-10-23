@@ -1,10 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // output: 'export',
-  // experimental: {
-  //   appDir: true, // keep App Router enabled
-  // },
+  appDir: true, // enable App Router (SSR) at the top level
+  // output: 'export', // keep commented to allow SSR
 };
 
 export default nextConfig;
