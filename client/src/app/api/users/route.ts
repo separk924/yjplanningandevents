@@ -116,7 +116,7 @@ export async function DELETE(req: Request) {
 async function searchUsersByName(firstName: string) {
   const users = await prisma.user.findMany({
     where: {
-      name: {
+      firstName: {
         contains: firstName,
         mode: 'insensitive',
       },
