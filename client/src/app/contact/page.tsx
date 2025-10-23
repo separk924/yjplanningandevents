@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import Navbar from "@/components/Navbar";
 import { SharpMenu } from "@/assets/Menu";
 // import Image from 'next/image';
@@ -7,6 +7,14 @@ import { SharpMenu } from "@/assets/Menu";
 export default function Home() {
     const [openNavbar, setOpenNavbar] = useState(false);
     const [animationClass, setAnimationClass] = useState('animate-slide-in-from-left');
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [eventLocation, setEventLocation] = useState("");
+    const [eventDate, setEventDate] = useState("");
+    const [guestCount, setGuestCount] = useState(0);
+    const [additionalDetails, setAdditionalDetails] = useState("");
 
     const handleOpen = () => {
         setAnimationClass('animate-slide-in-from-left');
@@ -20,6 +28,43 @@ export default function Home() {
       animationClass,
       setAnimationClass
     }
+
+    // ------------------ FORM SUBMIT HANDLER ------------------
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault(); // prevent page reload
+
+        const form = e.currentTarget;
+        const formData = new FormData(form);
+
+        // Convert FormData to JSON
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            // Create new user
+            const res = await fetch("/api/users", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            });
+
+            if (!res.ok) throw new Error("Failed to submit form");
+
+            // Send email
+            fetch("/api/emails", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            }).catch((err) => console.error("Email failed:", err));
+
+            const result = await res.json();
+            console.log("Form submitted successfully:", result);
+
+            // Optionally, reset the form
+            form.reset();
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     return (
       <>
@@ -48,19 +93,21 @@ export default function Home() {
                     </div>
 
                     {/* FORM */}
-                    <form className="max-w-md w-full">
+                    <form className="max-w-md w-full" onSubmit={handleSubmit}>
                         {/* NAME INPUTS */}
                         <div className="grid md:grid-cols-2 md:gap-6">
                             <div className="relative z-0 w-full mb-5 group">
                                 <input
                                 type="text"
-                                name="floating_first_name"
-                                id="floating_first_name"
+                                name="firstName"
+                                id="firstName"
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
                                 className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 peer"
                                 placeholder=" "
                                 required/>
                                 <label
-                                htmlFor="floating_first_name"
+                                htmlFor="firstName"
                                 className="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                 First name
                                 </label>
@@ -69,13 +116,15 @@ export default function Home() {
                             <div className="relative z-0 w-full mb-5 group">
                                 <input
                                 type="text"
-                                name="floating_last_name"
-                                id="floating_last_name"
+                                name="lastName"
+                                id="lastName"
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
                                 className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 peer"
                                 placeholder=" "
                                 required/>
                                 <label
-                                htmlFor="floating_last_name"
+                                htmlFor="lastName"
                                 className="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                 Last name
                                 </label>
@@ -88,6 +137,8 @@ export default function Home() {
                                 type="email"
                                 name="email"
                                 id="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 peer"
                                 placeholder=" "
                                 required/>
@@ -102,14 +153,16 @@ export default function Home() {
                         <div className="relative z-0 w-full mb-5 group">
                             <input
                                 type="tel"
-                                name="phone"
-                                id="phone"
+                                name="phoneNumber"
+                                id="phoneNumber"
+                                value={phoneNumber}
+                                onChange={(e) => setPhoneNumber(e.target.value)}
                                 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                                 className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 peer"
                                 placeholder=" "
                                 required/>
                             <label
-                                htmlFor="phone"
+                                htmlFor="phoneNumber"
                                 className="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                 Phone Number
                             </label>
@@ -119,13 +172,15 @@ export default function Home() {
                         <div className="relative z-0 w-full mb-5 group">
                             <input
                                 type="text"
-                                name="location"
-                                id="location"
+                                name="eventLocation"
+                                id="eventLocation"
+                                value={eventLocation}
+                                onChange={(e) => setEventLocation(e.target.value)}
                                 className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 peer"
                                 placeholder=" "
                                 required/>
                             <label
-                                htmlFor="location"
+                                htmlFor="eventLocation"
                                 className="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                 Event Location
                             </label>
@@ -137,6 +192,8 @@ export default function Home() {
                                 type="date"
                                 name="eventDate"
                                 id="eventDate"
+                                value={eventDate}
+                                onChange={(e) => setEventDate(e.target.value)}
                                 className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 peer"
                                 placeholder=" "
                                 required/>
@@ -153,6 +210,8 @@ export default function Home() {
                                 type="number"
                                 name="guestCount"
                                 id="guestCount"
+                                value={guestCount}
+                                onChange={(e) => setGuestCount(Number(e.target.value))}
                                 className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 peer"
                                 placeholder=" "
                                 required/>
@@ -166,15 +225,17 @@ export default function Home() {
                         {/* ADDITIONAL DETAILS */}
                         <div className="relative z-0 w-full mb-5 group">
                             <textarea
-                                name="addDetails"
-                                id="addDetails"
+                                name="additionalDetails"
+                                id="additionalDetails"
+                                value={additionalDetails}
+                                onChange={(e) => setAdditionalDetails(e.target.value)}
                                 rows={4} // or however many rows you want to show by default
                                 className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 peer resize-none"
                                 placeholder=" "
                                 required
                             />
                             <label
-                                htmlFor="addDetails"
+                                htmlFor="additionalDetails"
                                 className="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                 Additional Details
                             </label>

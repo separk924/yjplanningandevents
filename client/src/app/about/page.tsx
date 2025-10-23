@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import { SharpMenu } from "@/assets/Menu";
 // import Image from 'next/image';
