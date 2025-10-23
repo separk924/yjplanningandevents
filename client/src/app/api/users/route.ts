@@ -17,7 +17,7 @@ export async function GET(req: Request) {
 }
 
 // ----------------- GET a single user by ID -----------------
-export async function getUserById(id: string) {
+async function getUserById(id: string) {
   const user = await prisma.user.findUnique({
     where: { id },
   })
@@ -26,7 +26,7 @@ export async function getUserById(id: string) {
 }
 
 // ----------------- GET a single user by email -----------------
-export async function getUserByEmail(email: string) {
+async function getUserByEmail(email: string) {
   const user = await prisma.user.findUnique({
     where: { email },
   })
@@ -35,7 +35,7 @@ export async function getUserByEmail(email: string) {
 }
 
 // ----------------- GET a single user by first name -----------------
-export async function getUserName(email: string) {
+async function getUserName(email: string) {
   const user = await prisma.user.findUnique({
     where: { firstName },
   })
@@ -122,7 +122,7 @@ export async function DELETE(req: Request) {
 }
 
 // ----------------- Example: Search users by name -----------------
-export async function searchUsersByName(name: string) {
+async function searchUsersByName(name: string) {
   const users = await prisma.user.findMany({
     where: {
       name: {
