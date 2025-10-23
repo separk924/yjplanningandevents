@@ -34,15 +34,6 @@ async function getUserByEmail(email: string) {
   return NextResponse.json(user)
 }
 
-// ----------------- GET a single user by first name -----------------
-async function getUserName(email: string) {
-  const user = await prisma.user.findUnique({
-    where: { firstName },
-  })
-  if (!user) return NextResponse.json({ error: 'User not found' }, { status: 404 })
-  return NextResponse.json(user)
-}
-
 export async function POST(req: Request) {
   try {
     const body = await req.json();
