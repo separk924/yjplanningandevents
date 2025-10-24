@@ -1,19 +1,31 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { runWithAmplifyServerContext } from '@/../../utils/amplify-server';
 
 // ----------------- GET all users -----------------
 export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url)
-  const id = searchParams.get('id')
-  const email = searchParams.get('email')
-  const firstName = searchParams.get('firstName')
+  try {
+    const data = await runWithAmplifyServerContext({
+      nextServerContext: null,
+      operation: async (contextSpec) => {
+        const { searchParams } = new URL(req.url);
+        const id = searchParams.get('id');
+        const email = searchParams.get('email');
+        // const firstName = searchParams.get('firstName');
 
-  if (id) return getUserById(id)
-  if (email) return getUserByEmail(email)
-  // if (firstName) return searchUsersByName(firstName)
+        if (id) return getUserById(id);
+        if (email) return getUserByEmail(email);
+        // if (firstName) return searchUsersByName(firstName)
+        return prisma.user.findMany();
+      },
+    });
 
-  const users = await prisma.user.findMany()
-  return NextResponse.json(users)
+    return NextResponse.json(data, { status: 200 });
+  } catch (err: unknown) {
+    console.error("POST /api/users error:", err);
+    const message = err instanceof Error ? err.message : "Failed to create user";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }
 
 // ----------------- GET a single user by ID -----------------
@@ -36,25 +48,32 @@ async function getUserByEmail(email: string) {
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    console.log(body);
-    const newUser = await prisma.user.create({
-      data: {
-        firstName: body.firstName,
-        lastName: body.lastName,
-        email: body.email,
-        phoneNumber: body.phoneNumber,
-        eventLocation: body.eventLocation,
-        eventDate: new Date(body.eventDate),
-        guestCount: Number(body.guestCount),
-        additionalDetails: body.additionalDetails,
+    const newUser = await runWithAmplifyServerContext({
+      nextServerContext: null,
+      operation: async (contextSpec) => {
+        const body = await req.json();
+        console.log(body);
+
+        return prisma.user.create({
+          data: {
+            firstName: body.firstName,
+            lastName: body.lastName,
+            email: body.email,
+            phoneNumber: body.phoneNumber,
+            eventLocation: body.eventLocation,
+            eventDate: new Date(body.eventDate),
+            guestCount: Number(body.guestCount),
+            additionalDetails: body.additionalDetails,
+          },
+        });
       },
     });
 
     return NextResponse.json(newUser, { status: 201 });
-  } catch (err) {
+  } catch (err: unknown) {
     console.error("POST /api/users error:", err);
-    return NextResponse.json({ error: "Failed to create user" }, { status: 500 });
+    const message = err instanceof Error ? err.message : "Failed to update user";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 
