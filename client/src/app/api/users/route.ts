@@ -1,80 +1,106 @@
+import '../../../../instrumentation';
+export const runtime = 'nodejs';
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { runWithAmplifyServerContext } from '@/../../utils/amplify-server';
+import { trace, context, SpanStatusCode } from '@opentelemetry/api';
 
 // ----------------- GET all users -----------------
-export async function GET(req: Request) {
-  try {
-    const data = await runWithAmplifyServerContext({
-      nextServerContext: null,
-      operation: async (contextSpec) => {
-        const { searchParams } = new URL(req.url);
-        const id = searchParams.get('id');
-        const email = searchParams.get('email');
-        // const firstName = searchParams.get('firstName');
+// export async function GET(req: Request) {
+//   try {
+//     const data = await runWithAmplifyServerContext({
+//       nextServerContext: null,
+//       operation: async (contextSpec) => {
+//         const { searchParams } = new URL(req.url);
+//         const id = searchParams.get('id');
+//         const email = searchParams.get('email');
+//         // const firstName = searchParams.get('firstName');
 
-        if (id) return getUserById(id);
-        if (email) return getUserByEmail(email);
-        // if (firstName) return searchUsersByName(firstName)
-        return prisma.user.findMany();
-      },
-    });
+//         if (id) return getUserById(id);
+//         if (email) return getUserByEmail(email);
+//         // if (firstName) return searchUsersByName(firstName)
+//         return prisma.user.findMany();
+//       },
+//     });
 
-    return NextResponse.json(data, { status: 200 });
-  } catch (err: unknown) {
-    console.error("POST /api/users error:", err);
-    const message = err instanceof Error ? err.message : "Failed to create user";
-    return NextResponse.json({ error: message }, { status: 500 });
-  }
-}
+//     return NextResponse.json(data, { status: 200 });
+//   } catch (err: unknown) {
+//     console.error("POST /api/users error:", err);
+//     const message = err instanceof Error ? err.message : "Failed to create user";
+//     return NextResponse.json({ error: message }, { status: 500 });
+//   }
+// }
 
 // ----------------- GET a single user by ID -----------------
-async function getUserById(id: string) {
-  const user = await prisma.user.findUnique({
-    where: { id },
-  })
-  if (!user) return NextResponse.json({ error: 'User not found' }, { status: 404 })
-  return NextResponse.json(user)
-}
+// async function getUserById(id: string) {
+//   const user = await prisma.user.findUnique({
+//     where: { id },
+//   })
+//   if (!user) return NextResponse.json({ error: 'User not found' }, { status: 404 })
+//   return NextResponse.json(user)
+// }
 
 // ----------------- GET a single user by email -----------------
-async function getUserByEmail(email: string) {
-  const user = await prisma.user.findUnique({
-    where: { email },
-  })
-  if (!user) return NextResponse.json({ error: 'User not found' }, { status: 404 })
-  return NextResponse.json(user)
-}
+// async function getUserByEmail(email: string) {
+//   const user = await prisma.user.findUnique({
+//     where: { email },
+//   })
+//   if (!user) return NextResponse.json({ error: 'User not found' }, { status: 404 })
+//   return NextResponse.json(user)
+// }
 
 export async function POST(req: Request) {
-  try {
-    const newUser = await runWithAmplifyServerContext({
-      nextServerContext: null,
-      operation: async (contextSpec) => {
-        const body = await req.json();
-        console.log(body);
+  const tracer = trace.getTracer('users-route');
 
-        return prisma.user.create({
-          data: {
-            firstName: body.firstName,
-            lastName: body.lastName,
-            email: body.email,
-            phoneNumber: body.phoneNumber,
-            eventLocation: body.eventLocation,
-            eventDate: new Date(body.eventDate),
-            guestCount: Number(body.guestCount),
-            additionalDetails: body.additionalDetails,
-          },
-        });
-      },
-    });
+  let result;
+  const parentSpan = tracer.startSpan('create-user');
+  await context.with(trace.setSpan(context.active(), parentSpan), async () => {
+    try {
+      const body = await req.json();
+      parentSpan.addEvent('Received POST /api/users request');
+      console.log(body);
 
-    return NextResponse.json(newUser, { status: 201 });
-  } catch (err: unknown) {
-    console.error("POST /api/users error:", err);
-    const message = err instanceof Error ? err.message : "Failed to update user";
-    return NextResponse.json({ error: message }, { status: 500 });
-  }
+      const amplifySpan = tracer.startSpan('amplify-context');
+      const newUser = await runWithAmplifyServerContext({
+        nextServerContext: null,
+        operation: async () => {
+          const dbSpan = tracer.startSpan('prisma.user.create');
+          try {
+            return await prisma.user.create({
+              data: {
+                firstName: body.firstName,
+                lastName: body.lastName,
+                email: body.email,
+                phoneNumber: body.phoneNumber,
+                eventLocation: body.eventLocation,
+                eventDate: new Date(body.eventDate),
+                guestCount: Number(body.guestCount),
+                additionalDetails: body.additionalDetails,
+              },
+            });
+          } catch (err) {
+            dbSpan.recordException(err as Error);
+            dbSpan.setStatus({ code: SpanStatusCode.ERROR });
+            throw err;
+          } finally {
+            dbSpan.end();
+          }
+        },
+      });
+      amplifySpan.end();
+
+      parentSpan.setStatus({ code: SpanStatusCode.OK });
+      result = NextResponse.json(newUser, { status: 201 });
+    } catch (err: any) {
+      parentSpan.recordException(err);
+      parentSpan.setStatus({ code: SpanStatusCode.ERROR, message: err.message });
+      result = NextResponse.json({ error: err.message }, { status: 500 });
+    } finally {
+      parentSpan.end();
+    }
+  });
+
+  return result;
 }
 
 // ----------------- UPDATE a user -----------------
