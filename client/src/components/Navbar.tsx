@@ -7,6 +7,11 @@ interface NavBarProps {
   setAnimationClass: React.Dispatch<React.SetStateAction<string>>;
 }
 
+/**
+ * This is a Navbar component that contains 
+ * @param param0 
+ * @returns 
+ */
 const Navbar: React.FC<NavBarProps> = ({ setOpenNavbar, animationClass, setAnimationClass }) => {
 
     const handleClose = () => {
@@ -21,6 +26,7 @@ const Navbar: React.FC<NavBarProps> = ({ setOpenNavbar, animationClass, setAnima
         { name: "About", href: "/about" },
         { name: "Services", href: "/services"},
         { name: "Contact", href: "/contact"},
+        // { name: "Gallery", href: "/gallery"},
         // { name: "FAQ", href: "/faq"},
         // { name: "Reviews", href: "/reviews"}
     ]
@@ -29,10 +35,10 @@ const Navbar: React.FC<NavBarProps> = ({ setOpenNavbar, animationClass, setAnima
         <div className="inline-flex">
             <div className="bg-sky-100 w-screen">
                 <div className={`
-                    fixed inset-5 z-50 bg-orange-50
+                    fixed inset-0 z-50 bg-orange-50 p-10
                     ${animationClass}
                 `}>
-                    <div className="flex justify-end p-4">
+                    <div className="flex justify-end">
                         <button
                             onClick={handleClose}
                             className="hover:scale-110 transition-transform duration-300">

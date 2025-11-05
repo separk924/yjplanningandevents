@@ -2,7 +2,7 @@
 import { useState, FormEvent } from "react";
 import Navbar from "@/components/Navbar";
 import { SharpMenu } from "@/assets/Menu";
-// import Image from 'next/image';
+import Image from 'next/image';
 
 export default function Home() {
     const [openNavbar, setOpenNavbar] = useState(false);
@@ -72,10 +72,10 @@ export default function Home() {
           <main className={`transition-opacity duration-500 `}>
             <div className="flex items-center justify-between w-full px-8">
               <div className="flex items-center">
-                <img alt="logo" src="/YJ_Planning&Events_Logo.png" className="w-15 h-25 mt-2"/>
+                <Image alt="logo" src="/YJ_Planning&Events_Logo.png" className="w-10 sm:w-14 md:w-16 lg:w-20 h-auto mt-2" width={60} height={100}/>
               </div>
               <div className="text-5xl text-center">
-                Services
+                Contact
               </div>
               {!openNavbar ? (
                 <div className="flex items-center cursor-pointer mr-10" onClick={handleOpen}>
@@ -89,7 +89,7 @@ export default function Home() {
                 <div className="flex justify-center items-start gap-10 px-10 py-10 flex-wrap">
                     {/* IMAGE */}
                     <div className="flex-shrink-0">
-                        <img src="/profile.png" className="w-80 h-100" alt="Profile" />
+                        <Image alt="profile" src="/profile.png" className="w-[250px] sm:w-[300px] md:w-[350px] mx-auto" width={350} height={583}/>
                     </div>
 
                     {/* FORM */}
