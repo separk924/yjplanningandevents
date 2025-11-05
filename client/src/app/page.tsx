@@ -42,7 +42,7 @@ export default function Home() {
                   <Image
                     alt="YJ Planning & Events Logo - Wedding Planning Services in Seattle"
                     src="/YJ_Planning&Events_Logo.png"
-                    className="mt-2 w-20 sm:w-28 md:w-32 lg:w-35 h-auto"
+                    className="mt-2 w-32 lg:w-35 h-auto"
                     width={100}
                     height={180}
                   />
