@@ -39,20 +39,17 @@ const Navbar: React.FC<NavBarProps> = ({ setOpenNavbar, animationClass, setAnima
                             <TwotoneFullscreenExit onClick={handleClose}/>
                         </button>
                     </div>
-                    <div className="block">
-                        <ul className="flex flex-col gap-2 mt-2 mb-4 items-center">
-                            {navItems.map((item, index) => (
-                            <li
-                                key={index}
-                                className="flex items-center p-1 text-2xl gap-x-2 text-slate-500 hover:text-slate-600 mb-20">
-                                <Link href={item.href} className="flex items-center">
-                                {item.name}
-                                </Link>
-                            </li>
-                            ))}
-                        </ul>
-                    </div>
-                    
+                    <ul className="flex flex-col justify-between h-[calc(100%-80px)] py-10 items-center pb-20">
+                        {navItems.map((item, index) => (
+                        <li
+                            key={index}
+                            className="flex items-center text-2xl gap-x-2 text-slate-500 hover:text-slate-600 list-none">
+                            <Link href={item.href} className="flex items-center">
+                            {item.name}
+                            </Link>
+                        </li>
+                        ))}
+                    </ul>
                 </div>
             </div>
         </div>
