@@ -33,7 +33,7 @@ const LogoLoader = ({ onFinish }: LogoLoaderProps ) => {
             ${animateOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
             <div className={`transform transition-all duration-2000
                 ${animateIn ? 'translate-y-0 opacity-100' : 'translate-y-[-200px] opacity-0'}`}>
-                <Image src="/YJ_Planning&Events_Logo.png" alt="Logo" className="" width={150} height={300}/>
+                <Image src="/YJ_Planning&Events_Logo.png" alt="Logo" width={150} height={300}/>
             </div>
         </div>
     )

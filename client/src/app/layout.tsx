@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "YJ Weddings",
-  description: "Allison's Event Planning & Coordinating Website",
+  title: "Wedding Day Coordination & Planning | Seattle",
+  description: "Professional wedding day coordination and planning services in Seattle. Make your dream wedding stress-free.",
   icons: {
     icon: '/favicon.png',
   },

@@ -26,28 +26,47 @@ export default function Home() {
     return (
       <>
         {!isLogoDone && <LogoLoader onFinish={() => {return setIsLogoDone(true);}}/>}
-        <div className="relative min-h-screen bg-contain sm:bg-cover bg-left bg-no-repeat bg-[#F2F6F7]" style={{ backgroundImage: "url('/main.jpg')" }}>
-          <main className={`transition-opacity duration-500 ${isLogoDone ? 'opacity-100' : 'opacity-0'}`}>
-            <div className="grid grid-cols-3 items-center w-full">
-              <div></div>
-              <div className="flex justify-center">
-                <Image alt="logo" src="/YJ_Planning&Events_Logo.png" className="mt-2 w-20 sm:w-28 md:w-32 lg:w-35 h-auto" width={100} height={180}/>
+        <h1 className="sr-only">Wedding Day Coordinator and Planner in Seattle</h1>
+
+          <div className="relative w-full h-screen">
+            <Image
+              src="/main.jpg"
+              alt="Wedding Planning Hero"
+              fill
+              className="object-cover"
+              priority />
+            <main className={`absolute inset-0 transition-opacity duration-500 ${isLogoDone ? 'opacity-100' : 'opacity-0'}`}>
+              <div className="grid grid-cols-3 items-center w-full">
+                <div></div>
+                <div className="flex justify-center">
+                  <Image
+                    alt="YJ Planning & Events Logo - Wedding Planning Services in Seattle"
+                    src="/YJ_Planning&Events_Logo.png"
+                    className="mt-2 w-20 sm:w-28 md:w-32 lg:w-35 h-auto"
+                    width={100}
+                    height={180}
+                  />
+                </div>
+                <div className="ml-auto mr-3 sm:-mt-30">
+                  {!openNavbar ? (
+                    <div onClick={handleOpen}>
+                      <SharpMenu />
+                    </div>
+                  ) : (
+                    <Navbar {...navBarProps} />
+                  )}
+                </div>
               </div>
-              <div className="ml-auto mr-3 sm:-mt-30">
-                {!openNavbar ? (
-                  <div onClick={handleOpen}>
-                    <SharpMenu />
-                  </div>
-                ) : (
-                  <Navbar {...navBarProps} />
-                )}
+              <div className="absolute bottom-[50px] flex justify-start items-center w-full overflow-hidden">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold m-10 sm:m-20 md:ml-20 text-white">
+                  Let&apos;s make your dream wedding come true
+                </h2>
+                <h3 className="sr-only">
+                  Day-of Wedding Coordination and Full Wedding Planning Services
+                </h3>
               </div>
-            </div>
-            <div className="absolute bottom-[50px] overflow-hidden flex justify-start items-center w-full">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold m-10 sm:m-20 md:ml-20 sm:text-white text-black">Let&apos;s make your dream wedding come true</h1>
-            </div>
-          </main>
-        </div>
+            </main>
+          </div>
       </>
     );
 }

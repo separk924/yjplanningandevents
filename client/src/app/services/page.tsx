@@ -27,7 +27,7 @@ export default function Home() {
           <main className={`transition-opacity duration-500 `}>
             <div className="flex items-center justify-between w-full px-8">
               <div className="flex items-center">
-                <Image alt="logo" src="/YJ_Planning&Events_Logo.png" className="w-10 sm:w-14 md:w-16 lg:w-20 h-auto mt-2" width={60} height={100}/>
+                <Image alt="YJ Planning & Events Logo - Wedding Planning Services in Seattle" src="/YJ_Planning&Events_Logo.png" className="w-10 sm:w-14 md:w-16 lg:w-20 h-auto mt-2" width={60} height={100}/>
               </div>
               <div className="text-5xl text-center">
                 Services
