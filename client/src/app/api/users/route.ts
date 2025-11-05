@@ -91,10 +91,17 @@ export async function POST(req: Request) {
 
       parentSpan.setStatus({ code: SpanStatusCode.OK });
       result = NextResponse.json(newUser, { status: 201 });
-    } catch (err: any) {
-      parentSpan.recordException(err);
-      parentSpan.setStatus({ code: SpanStatusCode.ERROR, message: err.message });
-      result = NextResponse.json({ error: err.message }, { status: 500 });
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        parentSpan.recordException(err);
+        parentSpan.setStatus({ code: SpanStatusCode.ERROR, message: err.message });
+        result = NextResponse.json({ error: err.message }, { status: 500 });
+      } else {
+        const errorMessage = typeof err === "string" ? err : JSON.stringify(err);
+        parentSpan.recordException(errorMessage);
+        parentSpan.setStatus({ code: SpanStatusCode.ERROR, message: errorMessage });
+        result = NextResponse.json({ error: errorMessage }, { status: 500 });
+      }
     } finally {
       parentSpan.end();
     }
