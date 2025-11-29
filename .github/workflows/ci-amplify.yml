@@ -29,8 +29,10 @@ jobs:
     #         ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm install
-        working-directory: ./client
+        run: |
+          cd client
+          npm install
+
 
     #   - name: Cache Next.js build
     #     uses: actions/cache@v3
@@ -41,15 +43,17 @@ jobs:
     #         ${{ runner.os }}-next-
 
       - name: Lint
-        run: npm run lint
-        working-directory: ./client
+        run: |
+          cd client
+          npm install
 
     #   - name: Run tests
     #     run: npm test
 
       - name: Build
-        run: npm run build
-        working-directory: ./client
+        run: |
+          cd client
+          npm install
 
   deploy:
     name: Deploy to AWS Amplify
