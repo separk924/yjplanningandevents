@@ -61,11 +61,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      
+      - name: Install Amplify CLI
+        run: npm install -g @aws-amplify/cli
 
       - name: Deploy to Amplify
-        uses: aws-actions/amplify-cli-action@v2
-        with:
-          amplify_command: publish
+        run: amplify publish --yes
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
